@@ -19,4 +19,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="knapsack.in">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="knapsack.out">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
