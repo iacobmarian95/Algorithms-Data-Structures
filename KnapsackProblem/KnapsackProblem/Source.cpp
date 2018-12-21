@@ -2,7 +2,7 @@
 #include<vector>
 #include<fstream>
 #include<string>
-
+#include<algorithm>
 using namespace std;
 
 class Knapsack
@@ -28,7 +28,7 @@ class Knapsack
 		vector< vector<int> > P;
 };
 
-Knapsack::Knapsack(string in = "knapsack.in", string out = "knapsack.out")
+Knapsack::Knapsack(string in = "rucsac.in", string out = "rucsac.out")
 {
 	input = ifstream(in);
 	output = ofstream(out);
@@ -40,9 +40,9 @@ void Knapsack::Allocate()
 {
 	V.resize(N);
 	W.resize(N);
-	P.resize(N);
-	for (int i = 0; i < N; ++i)
-		P[i].resize(G);
+	P.resize(N + 1);
+	for (int i = 0; i <= N; ++i)
+		P[i].resize(G + 1);
 }
 
 void Knapsack::Deacllocate()
@@ -62,7 +62,25 @@ void Knapsack::ReadData()
 
 void Knapsack::Solve()
 {
-	
+	for(int i = 0; i <= N; ++i)
+		for (int w = 0; w <= G; ++w)
+		{
+			if (!i || !w)
+			{
+				P[i][w] = 0;
+				continue;
+			}
+
+			if (W[i - 1] > w)
+			{
+				P[i][w] = P[i - 1][w];
+				continue;
+			}
+
+			P[i][w] = max(P[i - 1][w], P[i - 1][w - W[i  -1]] + V[i - 1]);
+		}
+
+	output << P[N][G];
 }
 
 Knapsack::~Knapsack()
