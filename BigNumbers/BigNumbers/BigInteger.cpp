@@ -108,5 +108,8 @@ biginteger::BigInteger biginteger::BigInteger::operator-(biginteger::BigInteger&
 }
 
 biginteger::BigInteger::~BigInteger() {
+	delete[] this->m_Number;
 
+	this->m_Number = nullptr;
+	this->m_size = 0;
 }
